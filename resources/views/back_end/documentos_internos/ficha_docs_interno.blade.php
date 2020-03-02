@@ -221,7 +221,7 @@
                     <div class="active tab-pane" id="doc">
 
                         <iframe name="iframe"
-                                src="http://localhost:8000/StoragePartes/{{ $pdf->urldocint }}#toolbar=0&navpanes=0&scrollbar=0&zoom=75"
+                                src="/StoragePartes/{{ $pdf->urldocint }}#toolbar=0&navpanes=0&scrollbar=0&zoom=75"
                                 width="100%" height="600px" type="application/pdf">
                         </iframe>
 
