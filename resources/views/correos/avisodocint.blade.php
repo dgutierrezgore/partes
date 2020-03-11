@@ -103,7 +103,8 @@
 
                                         </tr>
                                         <tr>
-                                            <td colspan="4" style="padding: 20px 0 0 0; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
+                                            <td colspan="4"
+                                                style="padding: 20px 0 0 0; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
                                                 <ul>
                                                     <li>
                                                         <b>MATERIA:</b>
@@ -113,6 +114,12 @@
                                                         </p>
                                                     </li>
                                                 </ul>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <center><a class="btn" href="http://intranet.gorebiobio.cl">Clic aquí para ver documento</a>
+                                                </center>
                                             </td>
                                         </tr>
                                     </table>
