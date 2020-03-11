@@ -33,7 +33,7 @@
             <div class="inner">
                 <h3>{{ $ult_res_ex-1 }}</h3>
 
-                <p>Resoluciones Exentas</p>
+                <p>Último Folio Resoluciones Exentas</p>
             </div>
             <div class="icon">
                 <i class="fa fa-file-pdf-o"></i>
@@ -48,7 +48,7 @@
             <div class="inner">
                 <h3>{{ $ult_res_af-1 }}</h3>
 
-                <p>Resoluciones Afectas</p>
+                <p>Último Folio Resoluciones Afectas</p>
             </div>
             <div class="icon">
                 <i class="fa fa-file-pdf-o"></i>
@@ -63,7 +63,7 @@
             <div class="inner">
                 <h3>{{ $ult_circ-1 }}</h3>
 
-                <p>Ordinarios</p>
+                <p>Último Folio Ordinario</p>
             </div>
             <div class="icon">
                 <i class="fa fa-file-pdf-o"></i>
@@ -387,6 +387,14 @@
                                 <div class="col-sm-2">
                                     <input type="number" class="form-control" min="0" id="anniodocint"
                                            value="{{ date('Y') }}" name="anniodocint" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">A</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" id="adocintord2" name="adocintord" rows="1"
+                                              required
+                                              onkeyup="eventos_a(this)"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -823,6 +831,17 @@
                     $("#fecdocint3").focus();
                     $("#fecdocint3").css('border', '1px solid red');
                     return;
+                } else if ($("#adocintord2").val() == "") {
+                    $('#resp').html("" +
+                        "<div class=\"alert alert-warning alert-dismissable\">\n" +
+                        "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>" +
+                        "<h4><i class=\"icon fa fa-warning\"></i> ¡ALERTA DE SISTEMA!</h4>" +
+                        "Campo \"A\" es obligatorio.\n" +
+                        "</div>");
+                    $("#adocintord2").focus();
+                    $("#adocintord2").css('border', '1px solid red');
+                    return;
+
                 } else if ($("#matbitdocint3").val() == "") {
                     $('#resp').html("" +
                         "<div class=\"alert alert-warning alert-dismissable\">\n" +
@@ -839,9 +858,7 @@
         });
     </script>
 
-
     <script>
-
         function eventos_fechas() {
             $("#fecdocint").css('border', '2px solid green');
             $('#resp').html("");
@@ -912,6 +929,14 @@
             $("#matbitdocint3").css('border', '2px solid green');
             var tecla = e.value;
             $("#matbitdocint3").val(tecla.toUpperCase());
+            $('#resp').html("");
+            return;
+        }
+
+        function eventos_a(e) {
+            $("#adocintord2").css('border', '2px solid green');
+            var tecla = e.value;
+            $("#adocintord2").val(tecla.toUpperCase());
             $('#resp').html("");
             return;
         }

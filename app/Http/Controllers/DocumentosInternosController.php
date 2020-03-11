@@ -67,33 +67,30 @@ class DocumentosInternosController extends Controller
             if ($accesos->nivelacc == 1 || $accesos->nivelacc == 2) {
                 //Obtiene último folio asignado Res.Ex
                 $ult_res_ex = DB::table('op_documentos_internos')
-                    ->select('foliodocint')
                     ->where([
                         ['estdocint', '=', 1],
                         ['tipos_docs_internos_iddocsint', '=', 1]
                     ]) //Cambiar por tipo
-                    ->count();
+                    ->max('foliodocint');
 
                 //Le suma 1 al último folio asignado Res.Ex
                 $ult_res_ex = $ult_res_ex + 1;
 
                 $ult_res_af = DB::table('op_documentos_internos')
-                    ->select('foliodocint')
                     ->where([
                         ['estdocint', '=', 1],
                         ['tipos_docs_internos_iddocsint', '=', 2]
                     ]) //Cambiar por tipo
-                    ->count();
+                    ->max('foliodocint');
 
                 $ult_res_af = $ult_res_af + 1;
 
                 $ult_circ = DB::table('op_documentos_internos')
-                    ->select('foliodocint')
                     ->where([
                         ['estdocint', '=', 1],
                         ['tipos_docs_internos_iddocsint', '=', 3]
                     ]) //Cambiar por tipo
-                    ->count();
+                    ->max('foliodocint');
 
                 $ult_circ = $ult_circ + 1;
 
@@ -437,6 +434,7 @@ class DocumentosInternosController extends Controller
                             'foliosimpledocint' => $request->foliodocint . '_' . $request->anniodocint,
                             'foliocompdocint' => 'ORD_' . $request->foliodocint . '_' . $request->anniodocint,
                             'matdocint' => $request->matbitdocint,
+                            'adocintord' => $request->adocintord,
                             'fechadocint' => $request->fecdocint,
                             'urldocint' => $name,
                             'obsdocint' => $request->ingobsdocint,
