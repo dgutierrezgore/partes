@@ -103,7 +103,7 @@
                                             <?php foreach ($grilla_res_ex as $listado) {
                                                 echo "<tr><td>";
                                                 echo "<center><form action='/FichaDocsInt' method='POST'><input type='hidden' name='_token' value='" . csrf_token() . "'><input type='hidden' name='idficdocint' value='" . $listado->iddocint . "'>
-                                                <button class='btn btn-xs btn-success'><i class='fa fa-file-archive-o'></i> <br>RES EX." . $listado->foliodocint . "<br>".date('d - m - Y', strtotime($listado->fechadocint))."</button></form></center>";
+                                                <button class='btn btn-xs btn-success'><i class='fa fa-file-archive-o'></i> <br>RES EX." . $listado->foliodocint . "<br>" . date('d - m - Y', strtotime($listado->fechadocint)) . "</button></form></center>";
                                                 echo "</td>";
 
                                                 echo "<td>";
@@ -171,7 +171,7 @@
                                             <?php foreach ($grilla_res_af as $listado) {
                                                 echo "<tr><td>";
                                                 echo "<center><form action='/FichaDocsInt' method='POST'><input type='hidden' name='_token' value='" . csrf_token() . "'><input type='hidden' name='idficdocint' value='" . $listado->iddocint . "'>
-                                                <button class='btn btn-xs btn-success'><i class='fa fa-file-archive-o'></i> <br>RES AF." . $listado->foliodocint . "<br>".date('d - m - Y', strtotime($listado->fechadocint))."</button></form></center>";
+                                                <button class='btn btn-xs btn-success'><i class='fa fa-file-archive-o'></i> <br>RES AF." . $listado->foliodocint . "<br>" . date('d - m - Y', strtotime($listado->fechadocint)) . "</button></form></center>";
                                                 echo "</td>";
 
                                                 echo "<td>";
@@ -238,6 +238,7 @@
                                             <thead>
                                             <tr>
                                                 <th>Folio / Fecha</th>
+                                                <th>A</th>
                                                 <th>Materia</th>
                                                 <th>Privacidad</th>
                                                 <th>Observaciones</th>
@@ -247,7 +248,11 @@
                                             <?php foreach ($grilla_ord as $listado) {
                                                 echo "<tr><td>";
                                                 echo "<center><form action='/FichaDocsInt' method='POST'><input type='hidden' name='_token' value='" . csrf_token() . "'><input type='hidden' name='idficdocint' value='" . $listado->iddocint . "'>
-                                                <button class='btn btn-xs btn-success'><i class='fa fa-file-archive-o'></i> <br>ORD." . $listado->foliodocint . "<br>".date('d - m - Y', strtotime($listado->fechadocint))."</button></form></center>";
+                                                <button class='btn btn-xs btn-success'><i class='fa fa-file-archive-o'></i> <br>ORD." . $listado->foliodocint . "<br>" . date('d - m - Y', strtotime($listado->fechadocint)) . "</button></form></center>";
+                                                echo "</td>";
+
+                                                echo "<td>";
+                                                echo "<small>" . wordwrap($listado->adocintord, 45, '<br>', true) . "</small>";
                                                 echo "</td>";
 
                                                 echo "<td>";
