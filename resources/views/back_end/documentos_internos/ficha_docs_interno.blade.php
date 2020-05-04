@@ -585,7 +585,55 @@
                                             @endif
                                         </div>
                                     </li>
-                                @endif
+                                @elseif($listado->tipoaccbitdocint==6)
+                                    <li class="time-label">
+                        <span class="bg-red">
+                          {{date('d - m - Y',strtotime($listado -> fecbitdocint))}}
+                        </span>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-mail-forward bg-red"></i>
+
+                                        <div class="timeline-item">
+                                            <span class="time"><i class="fa fa-clock-o"></i> {{ $listado -> horabitdocint }}</span>
+
+                                            <h3 class="timeline-header">{{$listado->accbitdocint}}</h3>
+                                            <div class="timeline-body"><strong>Error en Digitalización:
+                                                    Notifica: {{ $listado->name }}</strong></div>
+                                            <div class="timeline-footer">
+                                                @if($listado->obspostdocint==1)
+                                                    <a class="btn btn-danger btn-xs">Error de Digitalización (PDF)</a>
+                                                @elseif($listado->obspostdocint==2)
+                                                    <a class="btn btn-danger btn-xs">Error en Materia (Texto)</a>
+                                                @elseif($listado->obspostdocint==3)
+                                                    <a class="btn btn-danger btn-xs">Error en Distribución (Interna /
+                                                        Externa)</a>
+                                                @elseif($listado->obspostdocint==4)
+                                                    <a class="btn btn-danger btn-xs">Otro error</a>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @elseif($listado->tipoaccbitdocint==7)
+                                        <li class="time-label">
+                        <span class="bg-red">
+                          {{date('d - m - Y',strtotime($listado -> fecbitdocint))}}
+                        </span>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-mail-forward bg-red"></i>
+
+                                            <div class="timeline-item">
+                                                <span class="time"><i class="fa fa-clock-o"></i> {{ $listado -> horabitdocint }}</span>
+
+                                                <h3 class="timeline-header">{{$listado->accbitdocint}}</h3>
+                                                <div class="timeline-body"><strong>CORREGIDO POR:
+                                                        {{ $listado->name }}</strong></div>
+                                                <div class="timeline-footer">
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endif
                             @endforeach
                         </ul>
                     </div>

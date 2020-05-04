@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4083d0f6-22a0-42be-b7d8-ffb358565c84" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/back_end/documentos_internos/erroneos.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/back_end/documentos_internos/ficha_error.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/back_end/documentos_internos/gestion_docs_internos.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back_end/documentos_internos/gestion_docs_internos.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DocumentosInternosController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DocumentosInternosController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/back_end/documentos_internos/ficha_docs_interno.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back_end/documentos_internos/ficha_docs_interno.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/back_end/documentos_internos/registrar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back_end/documentos_internos/registrar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/adminlte/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/adminlte/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/adminlte/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/adminlte/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/adminlte/layouts/partials/htmlheader.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/adminlte/layouts/partials/htmlheader.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/adminlte/layouts/partials/scripts.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/adminlte/layouts/partials/scripts.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/adminlte/layouts/partials/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/adminlte/layouts/partials/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +158,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Aplicativo Intranet/resources/views/back_end/arcdig/fic_doc_int.blade.php" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -237,7 +247,10 @@
       <workItem from="1583864971699" duration="1083000" />
       <workItem from="1583929384412" duration="5361000" />
       <workItem from="1584456325932" duration="96000" />
-      <workItem from="1584622035346" duration="331000" />
+      <workItem from="1584622035346" duration="661000" />
+      <workItem from="1584628758995" duration="599000" />
+      <workItem from="1588473630439" duration="3715000" />
+      <workItem from="1588479317322" duration="12503000" />
     </task>
     <servers />
   </component>
@@ -245,43 +258,31 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2472" y="184" key="#Notifications" timestamp="1578488007334">
-      <screen x="1920" y="0" width="1920" height="1050" />
-    </state>
-    <state x="2472" y="184" key="#Notifications/0.0.1280.689/-1920.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1578488007334" />
     <state x="2610" y="281" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1580939978820">
       <screen x="1920" y="0" width="1920" height="1050" />
     </state>
     <state x="2610" y="281" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1920.0.1920.1034/1920.0.1920.1050/0.0.1280.689@1920.0.1920.1050" timestamp="1580223094404" />
     <state x="2610" y="281" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.689/-1920.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1580939978820" />
-    <state x="-1180" y="281" key="FileChooserDialogImpl" timestamp="1583156924156">
-      <screen x="-1920" y="0" width="1920" height="1050" />
+    <state x="987" y="375" key="FileChooserDialogImpl" timestamp="1588557322987">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="2660" y="281" key="FileChooserDialogImpl/-1920.0.1920.1034/1920.0.1920.1050/0.0.1280.689@1920.0.1920.1050" timestamp="1580213600260" />
     <state x="-1180" y="281" key="FileChooserDialogImpl/0.0.1280.689/-1920.0.1920.1050/1920.0.1920.1050@-1920.0.1920.1050" timestamp="1583156924156" />
     <state x="493" y="184" key="FileChooserDialogImpl/0.0.1280.689/-1920.0.1920.1050/1920.0.1920.1050@0.0.1280.689" timestamp="1582226039741" />
     <state x="2660" y="281" key="FileChooserDialogImpl/0.0.1280.689/-1920.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1582227442413" />
-    <state x="493" y="184" key="FileChooserDialogImpl/0.0.1280.689/1920.0.1280.689@0.0.1280.689" timestamp="1578669084132" />
+    <state x="987" y="375" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1588557322987" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1582552945971">
       <screen x="1920" y="0" width="1920" height="1050" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1280.689/-1920.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1582552945971" />
-    <state x="341" y="170" key="com.intellij.ide.util.TipDialog" timestamp="1578487978881">
-      <screen x="0" y="0" width="1280" height="689" />
-    </state>
-    <state x="341" y="170" key="com.intellij.ide.util.TipDialog/0.0.1280.689/-1920.0.1920.1050/1920.0.1920.1050@0.0.1280.689" timestamp="1578487978881" />
     <state x="2534" y="141" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1580739170096">
       <screen x="1920" y="0" width="1920" height="1050" />
     </state>
     <state x="2534" y="141" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.689/-1920.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1580739170096" />
-    <state x="2576" y="123" width="607" height="804" key="find.popup" timestamp="1579631039816">
-      <screen x="1920" y="0" width="1920" height="1050" />
+    <state x="1213" y="298" width="613" height="804" key="find.popup" timestamp="1588480974745">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="2576" y="123" width="607" height="804" key="find.popup/0.0.1280.689/-1920.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1579631039816" />
-    <state x="2536" y="243" key="run.anything.popup" timestamp="1579636712801">
-      <screen x="1920" y="0" width="1920" height="1050" />
-    </state>
-    <state x="2536" y="243" key="run.anything.popup/0.0.1280.689/-1920.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1579636712801" />
+    <state x="1213" y="298" width="613" height="804" key="find.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1588480974745" />
     <state x="2543" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1580906210936">
       <screen x="1920" y="0" width="1920" height="1050" />
     </state>

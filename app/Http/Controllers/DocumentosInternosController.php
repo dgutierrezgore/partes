@@ -580,14 +580,17 @@ class DocumentosInternosController extends Controller
                 $grilla_res_ex = DB::table('op_documentos_internos')
                     ->join('listado_funcionarios', 'listado_funcionarios.idfunc', 'op_documentos_internos.listado_funcionarios_idfunc')
                     ->where('tipos_docs_internos_iddocsint', 1)
+                    ->orderBy('foliodocint', 'desc')
                     ->get();
 
                 $grilla_res_af = DB::table('op_documentos_internos')
                     ->where('tipos_docs_internos_iddocsint', 2)
+                    ->orderBy('foliodocint', 'desc')
                     ->get();
 
                 $grilla_ord = DB::table('op_documentos_internos')
                     ->where('tipos_docs_internos_iddocsint', 3)
+                    ->orderBy('foliodocint', 'desc')
                     ->get();
 
                 $grilla_total = DB::table('op_documentos_internos')
@@ -1012,5 +1015,95 @@ class DocumentosInternosController extends Controller
 
     }
 
+    public function documentos_erroneos()
+    {
+
+        $grilla_pend = DB::table('op_error_docs_int')
+            ->join('op_documentos_internos', 'op_documentos_internos.iddocint', 'op_error_docs_int.op_documentos_internos_iddocint')
+            ->join('listado_funcionarios', 'listado_funcionarios.idfunc', 'op_error_docs_int.listado_funcionarios_idfunc')
+            ->where('estadoerrdocint', 0) // No Corregido.
+            ->get();
+
+        $grilla_corre = DB::table('op_error_docs_int')
+            ->join('op_documentos_internos', 'op_documentos_internos.iddocint', 'op_error_docs_int.op_documentos_internos_iddocint')
+            ->join('listado_funcionarios', 'listado_funcionarios.idfunc', 'op_error_docs_int.listado_funcionarios_idfunc')
+            ->join('users', 'users.id', 'op_error_docs_int.users_id')
+            ->where('estadoerrdocint', 1) //Corregido.
+            ->get();
+
+        return view('back_end.documentos_internos.erroneos',
+            [
+                'grilla_pendientes' => $grilla_pend,
+                'grilla_corregidos' => $grilla_corre
+            ]);
+
+    }
+
+    public function ficha_error_docs(Request $request)
+    {
+
+        $id_doc_int = $request->id_doc_erroneo;
+        $iderror = $request->id_error;
+
+        $info_doc_int = DB::table('op_documentos_internos')
+            ->join('op_tipos_docs_internos', 'op_tipos_docs_internos.iddocsint', 'op_documentos_internos.tipos_docs_internos_iddocsint')
+            ->where('iddocint', $id_doc_int) // No Corregido.
+            ->first();
+
+        return view('back_end.documentos_internos.ficha_error', [
+            'info' => $info_doc_int,
+            'error' => $iderror
+        ]);
+
+    }
+
+    public function guardar_doc_correg(Request $request)
+    {
+
+        $iddocerr = $request->iddocint;
+        $nueva_mat = $request->matbitdocint;
+        $tipo = 'CORRECCION';
+        $annio = date("Y");
+        $file = $request->file('arcdocint');
+        $name = $annio . '-' . $tipo . '-' . time() . '-' . $file->getClientOriginalName();
+        $file->move(public_path() . '/StoragePartes/', $name);
+
+        DB::table('op_documentos_internos')
+            ->where('iddocint', $iddocerr)
+            ->update([
+                'matdocint' => $nueva_mat,
+                'urldocint' => $name,
+                'obsdocint' => $request->ingobsdocint,
+                'refdocint' => $request->ingrefdocint
+            ]);
+
+        $iderror = $request->idferror;
+
+        DB::table('op_error_docs_int')
+            ->where('iderrdocint', $iderror)
+            ->update([
+                'feccorrerrint' => date('Y-m-d h:i:s'),
+                'estadoerrdocint' => 1,
+                'users_id' => Auth::user()->id
+            ]);
+
+        // BITACORA
+
+        DB::table('op_bitacora_docs_internos')->insert([
+            'accbitdocint' => 'Notificación de Corrección al Documento',
+            'tipoaccbitdocint' => 7,
+            'fecbitdocint' => date('Y-m-d'),
+            'horabitdocint' => date('h:i:s'),
+            'forsoldocint' => null,
+            'documentos_internos_iddocint' => $iddocerr,
+            'users_id' => Auth::user()->id
+        ]);
+
+        //Notifica Reparacion del Documento
+        //ENVIA CORREO ELECTRONICO AL USUARIO QUE REPORTA
+
+        return $this->documentos_erroneos();
+
+    }
 }
 

@@ -21,6 +21,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/FichaDocsInt', 'DocumentosInternosController@ingreso_documento');
     Route::get('/Mantenedores', 'DocumentosInternosController@gestion_mantenedores');
     Route::get('/BuscarRegistros', 'DocumentosInternosController@buscar_registros');
+    Route::get('/DocsConErrores', 'DocumentosInternosController@documentos_erroneos');
+
 
     Route::post('/FichaDocsInt', 'DocumentosInternosController@ficha_docs_interno');
 
@@ -36,6 +38,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/GuardarNuevoGrupoExterno', 'DocumentosInternosController@guardar_grupo_ext');
 
     Route::post('/BloquearEntrega', 'DocumentosInternosController@bloquear_doc');
+
+    Route::post('/FichaErrorDocInt','DocumentosInternosController@ficha_error_docs');
+    Route::post('/GuardarDocCorreg', 'DocumentosInternosController@guardar_doc_correg');
 
 });
 

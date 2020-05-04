@@ -16,6 +16,7 @@
                 <ul class="treeview-menu">
                     <li><a href="/IngresoDocumento"><i class="fa fa-plus"></i> Ingresar Documento</a></li>
                     <li><a href="/GestionDocsInt"><i class="fa fa-edit"></i> Gestión Documentos</a></li>
+                    <li><a href="/DocsConErrores"><i class="fa fa-eraser"></i> Documentos Erroneos</a></li>
                     <li><a href="/Mantenedores"><i class="fa fa-tasks"></i> Mantenedores</a></li>
                 </ul>
             </li>

@@ -114,7 +114,7 @@
                                 <label for="inputEmail3" class="col-sm-2 control-label">Folio</label>
                                 <div class="col-sm-2">
                                     <input type="number" class="form-control" value="{{ $ult_res_ex }}" id="foliodocint"
-                                           name="foliodocint" min="{{ $ult_res_ex }}">
+                                           name="foliodocint">
                                 </div>
                                 <label for="inputEmail3" class="col-sm-1 control-label">Año</label>
                                 <div class="col-sm-2">
@@ -268,7 +268,7 @@
                                 <label for="inputEmail3" class="col-sm-2 control-label">Folio</label>
                                 <div class="col-sm-2">
                                     <input type="number" class="form-control" value="{{ $ult_res_af }}" id="foliodocint"
-                                           name="foliodocint" min="{{ $ult_res_af }}">
+                                           name="foliodocint">
                                 </div>
                                 <label for="inputEmail3" class="col-sm-1 control-label">Año</label>
                                 <div class="col-sm-2">
@@ -381,7 +381,7 @@
                                 <label for="inputEmail3" class="col-sm-2 control-label">Folio</label>
                                 <div class="col-sm-2">
                                     <input type="number" class="form-control" value="{{ $ult_circ }}" id="foliodocint"
-                                           name="foliodocint" min="{{ $ult_circ }}">
+                                           name="foliodocint">
                                 </div>
                                 <label for="inputEmail3" class="col-sm-1 control-label">Año</label>
                                 <div class="col-sm-2">
