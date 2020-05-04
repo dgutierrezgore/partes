@@ -598,8 +598,7 @@
                                             <span class="time"><i class="fa fa-clock-o"></i> {{ $listado -> horabitdocint }}</span>
 
                                             <h3 class="timeline-header">{{$listado->accbitdocint}}</h3>
-                                            <div class="timeline-body"><strong>Error en Digitalización:
-                                                    Notifica: {{ $listado->name }}</strong></div>
+                                            <div class="timeline-body"><strong>Error en Digitalización</strong></div>
                                             <div class="timeline-footer">
                                                 @if($listado->obspostdocint==1)
                                                     <a class="btn btn-danger btn-xs">Error de Digitalización (PDF)</a>

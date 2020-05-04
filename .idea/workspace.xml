@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4083d0f6-22a0-42be-b7d8-ffb358565c84" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/back_end/documentos_internos/erroneos.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/back_end/documentos_internos/ficha_error.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DocumentosInternosController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DocumentosInternosController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/back_end/documentos_internos/ficha_docs_interno.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back_end/documentos_internos/ficha_docs_interno.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/back_end/documentos_internos/registrar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back_end/documentos_internos/registrar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/vendor/adminlte/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/adminlte/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/vendor/adminlte/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/adminlte/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/vendor/adminlte/layouts/partials/htmlheader.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/adminlte/layouts/partials/htmlheader.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/vendor/adminlte/layouts/partials/scripts.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/adminlte/layouts/partials/scripts.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/vendor/adminlte/layouts/partials/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/adminlte/layouts/partials/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-    </list>
+    <list default="true" id="4083d0f6-22a0-42be-b7d8-ffb358565c84" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -250,7 +237,7 @@
       <workItem from="1584622035346" duration="661000" />
       <workItem from="1584628758995" duration="599000" />
       <workItem from="1588473630439" duration="3715000" />
-      <workItem from="1588479317322" duration="12503000" />
+      <workItem from="1588479317322" duration="13197000" />
     </task>
     <servers />
   </component>
