@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4083d0f6-22a0-42be-b7d8-ffb358565c84" name="Default Changelist" comment="" />
+    <list default="true" id="4083d0f6-22a0-42be-b7d8-ffb358565c84" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/back_end/documentos_internos/ficha_docs_interno.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back_end/documentos_internos/ficha_docs_interno.blade.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -9,9 +12,7 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution>
-      <executable />
-    </execution>
+    <execution />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -139,13 +140,13 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Aplicativo Intranet/resources/views/back_end/arcdig/fic_doc_int.blade.php" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -156,18 +157,6 @@
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -237,27 +226,29 @@
       <workItem from="1584622035346" duration="661000" />
       <workItem from="1584628758995" duration="599000" />
       <workItem from="1588473630439" duration="3715000" />
-      <workItem from="1588479317322" duration="13197000" />
+      <workItem from="1588479317322" duration="13566000" />
+      <workItem from="1589311850927" duration="497000" />
+      <workItem from="1590728228874" duration="92000" />
+      <workItem from="1590728652466" duration="38000" />
+      <workItem from="1598223317950" duration="401000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2610" y="281" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1580939978820">
       <screen x="1920" y="0" width="1920" height="1050" />
     </state>
-    <state x="2610" y="281" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1920.0.1920.1034/1920.0.1920.1050/0.0.1280.689@1920.0.1920.1050" timestamp="1580223094404" />
     <state x="2610" y="281" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.689/-1920.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1580939978820" />
-    <state x="987" y="375" key="FileChooserDialogImpl" timestamp="1588557322987">
+    <state x="987" y="375" key="FileChooserDialogImpl" timestamp="1589312349532">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="2660" y="281" key="FileChooserDialogImpl/-1920.0.1920.1034/1920.0.1920.1050/0.0.1280.689@1920.0.1920.1050" timestamp="1580213600260" />
     <state x="-1180" y="281" key="FileChooserDialogImpl/0.0.1280.689/-1920.0.1920.1050/1920.0.1920.1050@-1920.0.1920.1050" timestamp="1583156924156" />
     <state x="493" y="184" key="FileChooserDialogImpl/0.0.1280.689/-1920.0.1920.1050/1920.0.1920.1050@0.0.1280.689" timestamp="1582226039741" />
     <state x="2660" y="281" key="FileChooserDialogImpl/0.0.1280.689/-1920.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1582227442413" />
-    <state x="987" y="375" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1588557322987" />
+    <state x="987" y="375" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1589312349532" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1582552945971">
       <screen x="1920" y="0" width="1920" height="1050" />
     </state>

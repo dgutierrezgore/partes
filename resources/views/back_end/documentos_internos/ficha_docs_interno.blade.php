@@ -56,6 +56,10 @@
                             <b>Cargado Por</b>
                             <small><p class="pull-right">{{$bitacora[0]->name}}</p></small>
                         </li>
+                        <li class="list-group-item">
+                            <b>Fecha de Carga</b>
+                            <small><p class="pull-right">{{date('d - m - Y',strtotime($bitacora[0]->fechadocint))}}</p></small>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.box-body -->
