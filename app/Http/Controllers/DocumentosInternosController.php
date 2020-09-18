@@ -196,342 +196,387 @@ class DocumentosInternosController extends Controller
                 try {
                     if ($tipodoc == 1) {
 
-                        $tipo = 'RES_EX';
-                        $annio = date("Y");
-                        $file = $request->file('arcdocint');
-                        $name = $annio . '-' . $tipo . '-' . time() . '-' . $file->getClientOriginalName();
-                        $file->move(public_path() . '/StoragePartes/', $name);
+                        //Verifica Si existe Res Ex con Igual Numero
 
-                        // Documentos Internos //
-                        $id_doc_int = DB::table('op_documentos_internos')->insertGetId([
-                            'foliodocint' => $request->foliodocint,
-                            'foliosimpledocint' => $request->foliodocint . '_' . $request->anniodocint,
-                            'foliocompdocint' => 'RES_EX_' . $request->foliodocint . '_' . $request->anniodocint,
-                            'matdocint' => $request->matbitdocint,
-                            'fechadocint' => $request->fecdocint,
-                            'urldocint' => $name,
-                            'obsdocint' => $request->ingobsdocint,
-                            'refdocint' => $request->ingrefdocint,
-                            'feccgrdocint' => null,
-                            'horacgrdocint' => null,
-                            'segdocint' => $request->segdocint,
-                            'estdocint' => 1,
-                            'tipos_docs_internos_iddocsint' => $tipodoc,
-                            'listado_funcionarios_idfunc' => $request->funinvdocint,
-                            'users_id' => Auth::user()->id
-                        ]);
+                        $folio_existe = DB::table('op_documentos_internos')
+                            ->where([
+                                ['tipos_docs_internos_iddocsint', $tipodoc],
+                                ['foliodocint', $request->foliodocint]
+                            ])
+                            ->count();
 
-                        //Asignación de Distribución Interna //
-                        $grupos_int = $request->idgrupintdocint;
+                        if ($folio_existe >= 1) {
 
-                        foreach ($grupos_int as $key => $value) {
+                            return back()->with('error', '¡EL FOLIO INGRESADO YA EXISTE REGISTRADO EN LA BASE DE DATOS!');
 
-                            DB::table('op_det_dist_docs_int')->insert([
-                                'fecenlacedocfunc' => date('Y-m-d h:i:s'),
-                                'documentos_internos_iddocint' => $id_doc_int,
-                                'grupos_dis_internos_idgrpdisint' => $grupos_int[$key]
+                        } else {
+
+                            $tipo = 'RES_EX';
+                            $annio = date("Y");
+                            $file = $request->file('arcdocint');
+                            $name = $annio . '-' . $tipo . '-' . time() . '-' . $file->getClientOriginalName();
+                            $file->move(public_path() . '/StoragePartes/', $name);
+
+                            // Documentos Internos //
+                            $id_doc_int = DB::table('op_documentos_internos')->insertGetId([
+                                'foliodocint' => $request->foliodocint,
+                                'foliosimpledocint' => $request->foliodocint . '_' . $request->anniodocint,
+                                'foliocompdocint' => 'RES_EX_' . $request->foliodocint . '_' . $request->anniodocint,
+                                'matdocint' => $request->matbitdocint,
+                                'fechadocint' => $request->fecdocint,
+                                'urldocint' => $name,
+                                'obsdocint' => $request->ingobsdocint,
+                                'refdocint' => $request->ingrefdocint,
+                                'feccgrdocint' => null,
+                                'horacgrdocint' => null,
+                                'segdocint' => $request->segdocint,
+                                'estdocint' => 1,
+                                'tipos_docs_internos_iddocsint' => $tipodoc,
+                                'listado_funcionarios_idfunc' => $request->funinvdocint,
+                                'users_id' => Auth::user()->id
                             ]);
 
-                            $ids_grupos[] = $grupos_int[$key];
-                        }
+                            //Bitácora //
+                            DB::table('op_bitacora_docs_internos')->insert([
+                                'accbitdocint' => 'Creación del Documento en Sistema',
+                                'tipoaccbitdocint' => 1,
+                                'fecbitdocint' => date('Y-m-d'),
+                                'horabitdocint' => date('h:i:s'),
+                                'forsoldocint' => null,
+                                'documentos_internos_iddocint' => $id_doc_int,
+                                'users_id' => Auth::user()->id
+                            ]);
 
-                        DB::table('op_lec_doc_int')->insert([
-                            'disdocintfunc' => 1,
-                            'recepfuncdocint' => 0,
-                            'lectfuncdocint' => 0,
-                            'estadolectdocint' => 1,
-                            'listado_funcionarios_idfunc' => $request->funinvdocint,
-                            'op_documentos_internos_iddocint' => $id_doc_int
-                        ]);
+                            //Asignación de Distribución Interna //
+                            $grupos_int = $request->idgrupintdocint;
 
-                        $id_func = DB::table('op_detalle_grupos_int')
-                            ->where('estadositdetfunc', 1)
-                            ->whereIn('grupos_dis_internos_idgrpdisint', DB::table('op_det_dist_docs_int')
-                                ->where('documentos_internos_iddocint', $id_doc_int)
-                                ->pluck('grupos_dis_internos_idgrpdisint'))
-                            ->select('listado_funcionarios_idfunc')
-                            ->distinct()
-                            ->pluck('listado_funcionarios_idfunc');
+                            foreach ($grupos_int as $key => $value) {
 
+                                DB::table('op_det_dist_docs_int')->insert([
+                                    'fecenlacedocfunc' => date('Y-m-d h:i:s'),
+                                    'documentos_internos_iddocint' => $id_doc_int,
+                                    'grupos_dis_internos_idgrpdisint' => $grupos_int[$key]
+                                ]);
 
-                        foreach ($id_func as $key => $value) {
+                                $ids_grupos[] = $grupos_int[$key];
+                            }
 
                             DB::table('op_lec_doc_int')->insert([
-                                'disdocintfunc' => 2,
+                                'disdocintfunc' => 1,
                                 'recepfuncdocint' => 0,
                                 'lectfuncdocint' => 0,
                                 'estadolectdocint' => 1,
-                                'listado_funcionarios_idfunc' => $id_func[$key],
+                                'listado_funcionarios_idfunc' => $request->funinvdocint,
                                 'op_documentos_internos_iddocint' => $id_doc_int
                             ]);
 
-                        }
+                            $id_func = DB::table('op_detalle_grupos_int')
+                                ->where('estadositdetfunc', 1)
+                                ->whereIn('grupos_dis_internos_idgrpdisint', DB::table('op_det_dist_docs_int')
+                                    ->where('documentos_internos_iddocint', $id_doc_int)
+                                    ->pluck('grupos_dis_internos_idgrpdisint'))
+                                ->select('listado_funcionarios_idfunc')
+                                ->distinct()
+                                ->pluck('listado_funcionarios_idfunc');
 
-                        //Asignación de Distribución Externa //
-                        $grupos_ext = $request->idgrupextdocint;
 
-                        foreach ($grupos_ext as $key => $value) {
+                            foreach ($id_func as $key => $value) {
 
-                            DB::table('op_det_dist_docs_ext')->insert([
-                                'fecenlacedocext' => date('Y-m-d h:i:s'),
-                                'documentos_internos_iddocint' => $id_doc_int,
-                                'grupos_dis_externos_idgrpdisext' => $grupos_ext[$key]
-                            ]);
-                        }
+                                DB::table('op_lec_doc_int')->insert([
+                                    'disdocintfunc' => 2,
+                                    'recepfuncdocint' => 0,
+                                    'lectfuncdocint' => 0,
+                                    'estadolectdocint' => 1,
+                                    'listado_funcionarios_idfunc' => $id_func[$key],
+                                    'op_documentos_internos_iddocint' => $id_doc_int
+                                ]);
 
-                        $datos_correo = DB::table('op_documentos_internos')
-                            ->join('listado_funcionarios', 'listado_funcionarios.idfunc', 'op_documentos_internos.listado_funcionarios_idfunc')
-                            ->where('iddocint', $id_doc_int)
-                            ->first();
+                            }
 
-                        $data_correo = array(
-                            'fecha' => $datos_correo->fechadocint,
-                            'materia' => $datos_correo->matdocint,
-                            'tipodoc' => 'RES. EXENTA',
-                            'numdoc' => $datos_correo->foliocompdocint,
-                            'referencia' => $datos_correo->refdocint
-                        );
+                            //Asignación de Distribución Externa //
+                            $grupos_ext = $request->idgrupextdocint;
 
-                        Mail::to($datos_correo->mailfunc)
-                            ->send(new AvisoDocumentoInterno($data_correo));
+                            foreach ($grupos_ext as $key => $value) {
 
-                        foreach ($ids_grupos as $key => $value) {
-                            $id_temp = DB::table('op_detalle_grupos_int')
-                                ->join('listado_funcionarios', 'listado_funcionarios.idfunc', 'op_detalle_grupos_int.listado_funcionarios_idfunc')
-                                ->where([
-                                    ['grupos_dis_internos_idgrpdisint', $ids_grupos[$key]],
-                                    ['estadositdetfunc', 1]
-                                ])
-                                ->pluck('mailfunc');
+                                DB::table('op_det_dist_docs_ext')->insert([
+                                    'fecenlacedocext' => date('Y-m-d h:i:s'),
+                                    'documentos_internos_iddocint' => $id_doc_int,
+                                    'grupos_dis_externos_idgrpdisext' => $grupos_ext[$key]
+                                ]);
+                            }
 
-                            Mail::to($id_temp)
+                            $datos_correo = DB::table('op_documentos_internos')
+                                ->join('listado_funcionarios', 'listado_funcionarios.idfunc', 'op_documentos_internos.listado_funcionarios_idfunc')
+                                ->where('iddocint', $id_doc_int)
+                                ->first();
+
+                            $data_correo = array(
+                                'fecha' => $datos_correo->fechadocint,
+                                'materia' => $datos_correo->matdocint,
+                                'tipodoc' => 'RES. EXENTA',
+                                'numdoc' => $datos_correo->foliocompdocint,
+                                'referencia' => $datos_correo->refdocint
+                            );
+
+                            Mail::to($datos_correo->mailfunc)
                                 ->send(new AvisoDocumentoInterno($data_correo));
-                        }
 
-                        //Bitácora //
-                        DB::table('op_bitacora_docs_internos')->insert([
-                            'accbitdocint' => 'Creación del Documento en Sistema',
-                            'tipoaccbitdocint' => 1,
-                            'fecbitdocint' => date('Y-m-d'),
-                            'horabitdocint' => date('h:i:s'),
-                            'forsoldocint' => null,
-                            'documentos_internos_iddocint' => $id_doc_int,
-                            'users_id' => Auth::user()->id
-                        ]);
+                            foreach ($ids_grupos as $key => $value) {
+                                $id_temp = DB::table('op_detalle_grupos_int')
+                                    ->join('listado_funcionarios', 'listado_funcionarios.idfunc', 'op_detalle_grupos_int.listado_funcionarios_idfunc')
+                                    ->where([
+                                        ['grupos_dis_internos_idgrpdisint', $ids_grupos[$key]],
+                                        ['estadositdetfunc', 1]
+                                    ])
+                                    ->pluck('mailfunc');
+
+                                Mail::to($id_temp)
+                                    ->send(new AvisoDocumentoInterno($data_correo));
+                            }
+
+                        }
 
                     } elseif ($tipodoc == 2) {
 
-                        $tipo = 'RES_AF';
-                        $annio = date("Y");
-                        $file = $request->file('arcdocintaf');
-                        $name = $annio . '-' . $tipo . '-' . time() . '-' . $file->getClientOriginalName();
-                        $file->move(public_path() . '/StoragePartes/', $name);
+                        $folio_existe = DB::table('op_documentos_internos')
+                            ->where([
+                                ['tipos_docs_internos_iddocsint', $tipodoc],
+                                ['foliodocint', $request->foliodocint]
+                            ])
+                            ->count();
 
-                        // Documentos Internos //
-                        $id_doc_int = DB::table('op_documentos_internos')->insertGetId([
-                            'foliodocint' => $request->foliodocint,
-                            'foliosimpledocint' => $request->foliodocint . '_' . $request->anniodocint,
-                            'foliocompdocint' => 'RES_AF_' . $request->foliodocint . '_' . $request->anniodocint,
-                            'matdocint' => $request->matbitdocint,
-                            'fechadocint' => $request->fecdocint,
-                            'urldocint' => $name,
-                            'obsdocint' => $request->ingobsdocint,
-                            'refdocint' => $request->ingrefdocint,
-                            'feccgrdocint' => null,
-                            'horacgrdocint' => null,
-                            'segdocint' => $request->segdocint,
-                            'estdocint' => 1,
-                            'tipos_docs_internos_iddocsint' => $tipodoc,
-                            'listado_funcionarios_idfunc' => null,
-                            'users_id' => Auth::user()->id
-                        ]);
+                        if ($folio_existe >= 1) {
 
-                        //Asignación de Distribución Interna //
-                        $grupos_int = $request->idgrupintdocint;
+                            return back()->with('error', '¡EL FOLIO INGRESADO YA EXISTE REGISTRADO EN LA BASE DE DATOS!');
 
-                        foreach ($grupos_int as $key => $value) {
+                        } else {
 
-                            DB::table('op_det_dist_docs_int')->insert([
-                                'fecenlacedocfunc' => date('Y-m-d h:i:s'),
+                            $tipo = 'RES_AF';
+                            $annio = date("Y");
+                            $file = $request->file('arcdocintaf');
+                            $name = $annio . '-' . $tipo . '-' . time() . '-' . $file->getClientOriginalName();
+                            $file->move(public_path() . '/StoragePartes/', $name);
+
+                            // Documentos Internos //
+                            $id_doc_int = DB::table('op_documentos_internos')->insertGetId([
+                                'foliodocint' => $request->foliodocint,
+                                'foliosimpledocint' => $request->foliodocint . '_' . $request->anniodocint,
+                                'foliocompdocint' => 'RES_AF_' . $request->foliodocint . '_' . $request->anniodocint,
+                                'matdocint' => $request->matbitdocint,
+                                'fechadocint' => $request->fecdocint,
+                                'urldocint' => $name,
+                                'obsdocint' => $request->ingobsdocint,
+                                'refdocint' => $request->ingrefdocint,
+                                'feccgrdocint' => null,
+                                'horacgrdocint' => null,
+                                'segdocint' => $request->segdocint,
+                                'estdocint' => 1,
+                                'tipos_docs_internos_iddocsint' => $tipodoc,
+                                'listado_funcionarios_idfunc' => null,
+                                'users_id' => Auth::user()->id
+                            ]);
+
+                            //Bitácora //
+                            DB::table('op_bitacora_docs_internos')->insert([
+                                'accbitdocint' => 'Creación del Documento en Sistema',
+                                'tipoaccbitdocint' => 1,
+                                'fecbitdocint' => date('Y-m-d'),
+                                'horabitdocint' => date('h:i:s'),
+                                'forsoldocint' => null,
                                 'documentos_internos_iddocint' => $id_doc_int,
-                                'grupos_dis_internos_idgrpdisint' => $grupos_int[$key]
+                                'users_id' => Auth::user()->id
                             ]);
 
-                            $ids_grupos[] = $grupos_int[$key];
+                            //Asignación de Distribución Interna //
+                            $grupos_int = $request->idgrupintdocint;
+
+                            foreach ($grupos_int as $key => $value) {
+
+                                DB::table('op_det_dist_docs_int')->insert([
+                                    'fecenlacedocfunc' => date('Y-m-d h:i:s'),
+                                    'documentos_internos_iddocint' => $id_doc_int,
+                                    'grupos_dis_internos_idgrpdisint' => $grupos_int[$key]
+                                ]);
+
+                                $ids_grupos[] = $grupos_int[$key];
+                            }
+
+                            $id_func = DB::table('op_detalle_grupos_int')
+                                ->where('estadositdetfunc', 1)
+                                ->whereIn('grupos_dis_internos_idgrpdisint', DB::table('op_det_dist_docs_int')
+                                    ->where('documentos_internos_iddocint', $id_doc_int)
+                                    ->pluck('grupos_dis_internos_idgrpdisint'))
+                                ->select('listado_funcionarios_idfunc')
+                                ->distinct()
+                                ->pluck('listado_funcionarios_idfunc');
+
+
+                            foreach ($id_func as $key => $value) {
+
+                                DB::table('op_lec_doc_int')->insert([
+                                    'disdocintfunc' => 2,
+                                    'recepfuncdocint' => 0,
+                                    'lectfuncdocint' => 0,
+                                    'estadolectdocint' => 1,
+                                    'listado_funcionarios_idfunc' => $id_func[$key],
+                                    'op_documentos_internos_iddocint' => $id_doc_int
+                                ]);
+
+                            }
+
+                            $datos_correo = DB::table('op_documentos_internos')
+                                ->where('iddocint', $id_doc_int)
+                                ->first();
+
+                            $data_correo = array(
+                                'fecha' => $datos_correo->fechadocint,
+                                'materia' => $datos_correo->matdocint,
+                                'tipodoc' => 'RES. AFECTA',
+                                'numdoc' => $datos_correo->foliocompdocint,
+                                'referencia' => $datos_correo->refdocint
+                            );
+
+                            foreach ($ids_grupos as $key => $value) {
+                                $id_temp = DB::table('op_detalle_grupos_int')
+                                    ->join('listado_funcionarios', 'listado_funcionarios.idfunc', 'op_detalle_grupos_int.listado_funcionarios_idfunc')
+                                    ->where([
+                                        ['grupos_dis_internos_idgrpdisint', $ids_grupos[$key]],
+                                        ['estadositdetfunc', 1]
+                                    ])
+                                    ->pluck('mailfunc');
+
+                                Mail::to($id_temp)
+                                    ->send(new AvisoDocumentoInterno($data_correo));
+                            }
+
                         }
-
-                        $datos_correo = DB::table('op_documentos_internos')
-                            ->where('iddocint', $id_doc_int)
-                            ->first();
-
-                        $data_correo = array(
-                            'fecha' => $datos_correo->fechadocint,
-                            'materia' => $datos_correo->matdocint,
-                            'tipodoc' => 'RES. AFECTA',
-                            'numdoc' => $datos_correo->foliocompdocint,
-                            'referencia' => $datos_correo->refdocint
-                        );
-
-                        foreach ($ids_grupos as $key => $value) {
-                            $id_temp = DB::table('op_detalle_grupos_int')
-                                ->join('listado_funcionarios', 'listado_funcionarios.idfunc', 'op_detalle_grupos_int.listado_funcionarios_idfunc')
-                                ->where([
-                                    ['grupos_dis_internos_idgrpdisint', $ids_grupos[$key]],
-                                    ['estadositdetfunc', 1]
-                                ])
-                                ->pluck('mailfunc');
-
-                            Mail::to($id_temp)
-                                ->send(new AvisoDocumentoInterno($data_correo));
-                        }
-
-                        $id_func = DB::table('op_detalle_grupos_int')
-                            ->where('estadositdetfunc', 1)
-                            ->whereIn('grupos_dis_internos_idgrpdisint', DB::table('op_det_dist_docs_int')
-                                ->where('documentos_internos_iddocint', $id_doc_int)
-                                ->pluck('grupos_dis_internos_idgrpdisint'))
-                            ->select('listado_funcionarios_idfunc')
-                            ->distinct()
-                            ->pluck('listado_funcionarios_idfunc');
-
-
-                        foreach ($id_func as $key => $value) {
-
-                            DB::table('op_lec_doc_int')->insert([
-                                'disdocintfunc' => 2,
-                                'recepfuncdocint' => 0,
-                                'lectfuncdocint' => 0,
-                                'estadolectdocint' => 1,
-                                'listado_funcionarios_idfunc' => $id_func[$key],
-                                'op_documentos_internos_iddocint' => $id_doc_int
-                            ]);
-
-                        }
-
-                        //Bitácora //
-                        DB::table('op_bitacora_docs_internos')->insert([
-                            'accbitdocint' => 'Creación del Documento en Sistema',
-                            'tipoaccbitdocint' => 1,
-                            'fecbitdocint' => date('Y-m-d'),
-                            'horabitdocint' => date('h:i:s'),
-                            'forsoldocint' => null,
-                            'documentos_internos_iddocint' => $id_doc_int,
-                            'users_id' => Auth::user()->id
-                        ]);
-
-
                     } elseif ($tipodoc == 3) {
 
-                        $tipo = 'ORD';
-                        $annio = date("Y");
-                        $file = $request->file('arcdocintcir');
-                        $name = $annio . '-' . $tipo . '-' . time() . '-' . $file->getClientOriginalName();
-                        $file->move(public_path() . '/StoragePartes/', $name);
+                        $folio_existe = DB::table('op_documentos_internos')
+                            ->where([
+                                ['tipos_docs_internos_iddocsint', $tipodoc],
+                                ['foliodocint', $request->foliodocint]
+                            ])
+                            ->count();
 
-                        // Documentos Internos //
-                        $id_doc_int = DB::table('op_documentos_internos')->insertGetId([
-                            'foliodocint' => $request->foliodocint,
-                            'foliosimpledocint' => $request->foliodocint . '_' . $request->anniodocint,
-                            'foliocompdocint' => 'ORD_' . $request->foliodocint . '_' . $request->anniodocint,
-                            'matdocint' => $request->matbitdocint,
-                            'adocintord' => $request->adocintord,
-                            'fechadocint' => $request->fecdocint,
-                            'urldocint' => $name,
-                            'obsdocint' => $request->ingobsdocint,
-                            'refdocint' => $request->ingrefdocint,
-                            'feccgrdocint' => null,
-                            'horacgrdocint' => null,
-                            'segdocint' => $request->segdocint,
-                            'estdocint' => 1,
-                            'tipos_docs_internos_iddocsint' => $tipodoc,
-                            'listado_funcionarios_idfunc' => null,
-                            'users_id' => Auth::user()->id
-                        ]);
+                        if ($folio_existe >= 1) {
 
-                        //Asignación de Distribución Interna //
-                        $grupos_int = $request->idgrupintdocint;
+                            return back()->with('error', '¡EL FOLIO INGRESADO YA EXISTE REGISTRADO EN LA BASE DE DATOS!');
 
-                        foreach ($grupos_int as $key => $value) {
+                        } else {
 
-                            DB::table('op_det_dist_docs_int')->insert([
-                                'fecenlacedocfunc' => date('Y-m-d h:i:s'),
+                            $tipo = 'ORD';
+                            $annio = date("Y");
+                            $file = $request->file('arcdocintcir');
+                            $name = $annio . '-' . $tipo . '-' . time() . '-' . $file->getClientOriginalName();
+                            $file->move(public_path() . '/StoragePartes/', $name);
+
+                            // Documentos Internos //
+                            $id_doc_int = DB::table('op_documentos_internos')->insertGetId([
+                                'foliodocint' => $request->foliodocint,
+                                'foliosimpledocint' => $request->foliodocint . '_' . $request->anniodocint,
+                                'foliocompdocint' => 'ORD_' . $request->foliodocint . '_' . $request->anniodocint,
+                                'matdocint' => $request->matbitdocint,
+                                'adocintord' => $request->adocintord,
+                                'fechadocint' => $request->fecdocint,
+                                'urldocint' => $name,
+                                'obsdocint' => $request->ingobsdocint,
+                                'refdocint' => $request->ingrefdocint,
+                                'feccgrdocint' => null,
+                                'horacgrdocint' => null,
+                                'segdocint' => $request->segdocint,
+                                'estdocint' => 1,
+                                'tipos_docs_internos_iddocsint' => $tipodoc,
+                                'listado_funcionarios_idfunc' => null,
+                                'users_id' => Auth::user()->id
+                            ]);
+
+                            //Bitácora //
+                            DB::table('op_bitacora_docs_internos')->insert([
+                                'accbitdocint' => 'Creación del Documento en Sistema',
+                                'tipoaccbitdocint' => 1,
+                                'fecbitdocint' => date('Y-m-d'),
+                                'horabitdocint' => date('h:i:s'),
+                                'forsoldocint' => null,
                                 'documentos_internos_iddocint' => $id_doc_int,
-                                'grupos_dis_internos_idgrpdisint' => $grupos_int[$key]
+                                'users_id' => Auth::user()->id
                             ]);
 
-                            $ids_grupos[] = $grupos_int[$key];
+                            //Asignación de Distribución Interna //
+                            $grupos_int = $request->idgrupintdocint;
+
+                            foreach ($grupos_int as $key => $value) {
+
+                                DB::table('op_det_dist_docs_int')->insert([
+                                    'fecenlacedocfunc' => date('Y-m-d h:i:s'),
+                                    'documentos_internos_iddocint' => $id_doc_int,
+                                    'grupos_dis_internos_idgrpdisint' => $grupos_int[$key]
+                                ]);
+
+                                $ids_grupos[] = $grupos_int[$key];
+                            }
+
+                            $grupos_ext = $request->idgrupextdocint;
+
+                            foreach ($grupos_ext as $key => $value) {
+
+                                DB::table('op_det_dist_docs_ext')->insert([
+                                    'fecenlacedocext' => date('Y-m-d h:i:s'),
+                                    'documentos_internos_iddocint' => $id_doc_int,
+                                    'grupos_dis_externos_idgrpdisext' => $grupos_ext[$key]
+                                ]);
+                            }
+
+                            $id_func = DB::table('op_detalle_grupos_int')
+                                ->where('estadositdetfunc', 1)
+                                ->whereIn('grupos_dis_internos_idgrpdisint', DB::table('op_det_dist_docs_int')
+                                    ->where('documentos_internos_iddocint', $id_doc_int)
+                                    ->pluck('grupos_dis_internos_idgrpdisint'))
+                                ->select('listado_funcionarios_idfunc')
+                                ->distinct()
+                                ->pluck('listado_funcionarios_idfunc');
+
+
+                            foreach ($id_func as $key => $value) {
+
+                                DB::table('op_lec_doc_int')->insert([
+                                    'disdocintfunc' => 2,
+                                    'recepfuncdocint' => 0,
+                                    'lectfuncdocint' => 0,
+                                    'estadolectdocint' => 1,
+                                    'listado_funcionarios_idfunc' => $id_func[$key],
+                                    'op_documentos_internos_iddocint' => $id_doc_int
+                                ]);
+
+                            }
+
+                            $datos_correo = DB::table('op_documentos_internos')
+                                ->where('iddocint', $id_doc_int)
+                                ->first();
+
+                            $data_correo = array(
+                                'fecha' => $datos_correo->fechadocint,
+                                'materia' => $datos_correo->matdocint,
+                                'tipodoc' => 'ORDINARIO',
+                                'numdoc' => $datos_correo->foliocompdocint,
+                                'referencia' => $datos_correo->refdocint
+                            );
+
+                            foreach ($ids_grupos as $key => $value) {
+                                $id_temp = DB::table('op_detalle_grupos_int')
+                                    ->join('listado_funcionarios', 'listado_funcionarios.idfunc', 'op_detalle_grupos_int.listado_funcionarios_idfunc')
+                                    ->where([
+                                        ['grupos_dis_internos_idgrpdisint', $ids_grupos[$key]],
+                                        ['estadositdetfunc', 1]
+                                    ])
+                                    ->pluck('mailfunc');
+
+                                Mail::to($id_temp)
+                                    ->send(new AvisoDocumentoInterno($data_correo));
+                            }
+
+
                         }
-
-                        $grupos_ext = $request->idgrupextdocint;
-
-                        foreach ($grupos_ext as $key => $value) {
-
-                            DB::table('op_det_dist_docs_ext')->insert([
-                                'fecenlacedocext' => date('Y-m-d h:i:s'),
-                                'documentos_internos_iddocint' => $id_doc_int,
-                                'grupos_dis_externos_idgrpdisext' => $grupos_ext[$key]
-                            ]);
-                        }
-
-                        $datos_correo = DB::table('op_documentos_internos')
-                            ->where('iddocint', $id_doc_int)
-                            ->first();
-
-                        $data_correo = array(
-                            'fecha' => $datos_correo->fechadocint,
-                            'materia' => $datos_correo->matdocint,
-                            'tipodoc' => 'ORDINARIO',
-                            'numdoc' => $datos_correo->foliocompdocint,
-                            'referencia' => $datos_correo->refdocint
-                        );
-
-                        foreach ($ids_grupos as $key => $value) {
-                            $id_temp = DB::table('op_detalle_grupos_int')
-                                ->join('listado_funcionarios', 'listado_funcionarios.idfunc', 'op_detalle_grupos_int.listado_funcionarios_idfunc')
-                                ->where([
-                                    ['grupos_dis_internos_idgrpdisint', $ids_grupos[$key]],
-                                    ['estadositdetfunc', 1]
-                                ])
-                                ->pluck('mailfunc');
-
-                            Mail::to($id_temp)
-                                ->send(new AvisoDocumentoInterno($data_correo));
-                        }
-
-                        $id_func = DB::table('op_detalle_grupos_int')
-                            ->where('estadositdetfunc', 1)
-                            ->whereIn('grupos_dis_internos_idgrpdisint', DB::table('op_det_dist_docs_int')
-                                ->where('documentos_internos_iddocint', $id_doc_int)
-                                ->pluck('grupos_dis_internos_idgrpdisint'))
-                            ->select('listado_funcionarios_idfunc')
-                            ->distinct()
-                            ->pluck('listado_funcionarios_idfunc');
-
-
-                        foreach ($id_func as $key => $value) {
-
-                            DB::table('op_lec_doc_int')->insert([
-                                'disdocintfunc' => 2,
-                                'recepfuncdocint' => 0,
-                                'lectfuncdocint' => 0,
-                                'estadolectdocint' => 1,
-                                'listado_funcionarios_idfunc' => $id_func[$key],
-                                'op_documentos_internos_iddocint' => $id_doc_int
-                            ]);
-
-                        }
-
-                        //Bitácora //
-                        DB::table('op_bitacora_docs_internos')->insert([
-                            'accbitdocint' => 'Creación del Documento en Sistema',
-                            'tipoaccbitdocint' => 1,
-                            'fecbitdocint' => date('Y-m-d'),
-                            'horabitdocint' => date('h:i:s'),
-                            'forsoldocint' => null,
-                            'documentos_internos_iddocint' => $id_doc_int,
-                            'users_id' => Auth::user()->id
-                        ]);
-
 
                     }
 

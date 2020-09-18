@@ -115,6 +115,12 @@
                                                 </ul>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td>
+                                                <center><a class="btn" href="http://intranet.gorebiobio.cl">Clic aquí para ver documento</a>
+                                                </center>
+                                            </td>
+                                        </tr>
                                     </table>
                                 </td>
                             </tr>
