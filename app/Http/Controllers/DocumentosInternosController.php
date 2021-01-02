@@ -69,8 +69,9 @@ class DocumentosInternosController extends Controller
                 $ult_res_ex = DB::table('op_documentos_internos')
                     ->where([
                         ['estdocint', '=', 1],
-                        ['tipos_docs_internos_iddocsint', '=', 1]
+                        ['tipos_docs_internos_iddocsint', '=', 1],
                     ]) //Cambiar por tipo
+                    //->whereYear('fechadocint', date('Y'))
                     ->max('foliodocint');
 
                 //Le suma 1 al último folio asignado Res.Ex
@@ -81,6 +82,7 @@ class DocumentosInternosController extends Controller
                         ['estdocint', '=', 1],
                         ['tipos_docs_internos_iddocsint', '=', 2]
                     ]) //Cambiar por tipo
+                    //->whereYear('fechadocint', date('Y'))
                     ->max('foliodocint');
 
                 $ult_res_af = $ult_res_af + 1;
@@ -90,6 +92,7 @@ class DocumentosInternosController extends Controller
                         ['estdocint', '=', 1],
                         ['tipos_docs_internos_iddocsint', '=', 3]
                     ]) //Cambiar por tipo
+                    //->whereYear('fechadocint', date('Y'))
                     ->max('foliodocint');
 
                 $ult_circ = $ult_circ + 1;
@@ -624,22 +627,28 @@ class DocumentosInternosController extends Controller
             if ($accesos->nivelacc == 1 || $accesos->nivelacc == 2) {
                 $grilla_res_ex = DB::table('op_documentos_internos')
                     ->join('listado_funcionarios', 'listado_funcionarios.idfunc', 'op_documentos_internos.listado_funcionarios_idfunc')
+                    ->whereYear('fechadocint', date('Y'))
                     ->where('tipos_docs_internos_iddocsint', 1)
                     ->orderBy('foliodocint', 'desc')
                     ->get();
 
                 $grilla_res_af = DB::table('op_documentos_internos')
+                    ->whereYear('fechadocint', date('Y'))
                     ->where('tipos_docs_internos_iddocsint', 2)
                     ->orderBy('foliodocint', 'desc')
                     ->get();
 
                 $grilla_ord = DB::table('op_documentos_internos')
+                    ->whereYear('fechadocint', date('Y'))
                     ->where('tipos_docs_internos_iddocsint', 3)
                     ->orderBy('foliodocint', 'desc')
                     ->get();
 
                 $grilla_total = DB::table('op_documentos_internos')
                     ->join('op_tipos_docs_internos', 'op_tipos_docs_internos.iddocsint', 'op_documentos_internos.tipos_docs_internos_iddocsint')
+                    ->whereYear('fechadocint', date('Y'))
+                    ->take(10)
+                    ->orderby('foliodocint', 'desc')
                     ->get();
 
                 return view('back_end.documentos_internos.gestion_docs_internos', [
@@ -1149,6 +1158,72 @@ class DocumentosInternosController extends Controller
 
         return $this->documentos_erroneos();
 
+    }
+
+    public
+    function archivo2020()
+    {
+
+        $accesos = DB::table('sys_acc_sistemas')
+            ->where([
+                ['users_id', Auth::user()->id]
+            ])
+            ->first();
+        if ($accesos->sys_sistemas_idsistemasgore == 1 && $accesos->estadoacc == 1) {
+            if ($accesos->nivelacc == 1 || $accesos->nivelacc == 2) {
+                $grilla_res_ex = DB::table('op_documentos_internos')
+                    ->join('listado_funcionarios', 'listado_funcionarios.idfunc', 'op_documentos_internos.listado_funcionarios_idfunc')
+                    ->whereYear('fechadocint', '2020')
+                    ->where('tipos_docs_internos_iddocsint', 1)
+                    ->orderBy('foliodocint', 'desc')
+                    ->get();
+
+                $grilla_res_af = DB::table('op_documentos_internos')
+                    ->whereYear('fechadocint', '2020')
+                    ->where('tipos_docs_internos_iddocsint', 2)
+                    ->orderBy('foliodocint', 'desc')
+                    ->get();
+
+                $grilla_ord = DB::table('op_documentos_internos')
+                    ->whereYear('fechadocint', '2020')
+                    ->where('tipos_docs_internos_iddocsint', 3)
+                    ->orderBy('foliodocint', 'desc')
+                    ->get();
+
+                $grilla_total = DB::table('op_documentos_internos')
+                    ->join('op_tipos_docs_internos', 'op_tipos_docs_internos.iddocsint', 'op_documentos_internos.tipos_docs_internos_iddocsint')
+                    ->whereYear('fechadocint', '2020')
+                    ->take(10)
+                    ->orderby('foliodocint', 'desc')
+                    ->get();
+
+                return view('back_end.documentos_internos.archivo2020', [
+                    'grilla_res_ex' => $grilla_res_ex,
+                    'grilla_res_af' => $grilla_res_af,
+                    'grilla_ord' => $grilla_ord,
+                    'grilla_total' => $grilla_total
+                ]);
+            } else {
+                DB::table('sys_acc_denegado')->insert([
+                    'fecregistro' => date('Y-m-d H:i:s'),
+                    'ip' => \Request::ip(),
+                    'tipo' => 'NIVEL',
+                    'modulo' => 'GESTION DOCUMENTO',
+                    'sys_sistemas_idsistemasgore' => 1,
+                    'users_id' => Auth::id()
+                ]);
+                return view('back_end.acc_denegado');
+            }
+        } else {
+            DB::table('sys_acc_denegado')->insert([
+                'fecregistro' => date('Y-m-d H:i:s'),
+                'ip' => \Request::ip(),
+                'tipo' => 'SISTEMA',
+                'sys_sistemas_idsistemasgore' => 1,
+                'users_id' => Auth::id()
+            ]);
+            return view('back_end.acc_denegado');
+        }
     }
 }
 

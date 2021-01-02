@@ -20,9 +20,15 @@
                     <li><a href="/Mantenedores"><i class="fa fa-tasks"></i> Mantenedores</a></li>
                 </ul>
             </li>
+            <li class="treeview">
+                <a href="#"><i class='fa fa-archive'></i> <span>Archivo Años Anteriores</span> <i
+                        class="fa fa-angle-down pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="/Archivo/2020"><i class="fa fa-eye"></i> Archivo 2020</a></li>
+                </ul>
+            </li>
             <li class="header">- DOCUMENTACIÓN EXTERNA -</li>
             <li><a href="#"><i class='fa fa-cubes'></i> <span>Próximamente</span></a></li>
-
             <li class="header">- OPCIONES DEL SISTEMA -</li>
             <li><a href="{{ url('/logout') }}"
                    onclick="event.preventDefault();

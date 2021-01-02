@@ -25,10 +25,10 @@
                     </div>
                 </div>
 
-                <div class="panel panel-warning">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <i class="fa fa-newspaper-o"></i> <strong>Cuadro Panel de Novedades al 04 de Mayo 2020</strong>
-                        <small>V.01</small>
+                        <i class="fa fa-newspaper-o"></i> <strong>Cuadro Panel de Novedades al 04 de Enero 2021</strong>
+                        <small>V.02</small>
                     </div>
 
                     <div class="panel-body">
@@ -37,6 +37,7 @@
                     </div>
                     <div class="panel-body">
                         <ul>
+                            <i class="fa fa-check"></i> Se incorpora Archivo 2020. <br>
                             <i class="fa fa-check"></i> Se incorpora nuevo panel de novedades. <br>
                             <i class="fa fa-check"></i> Ahora es posible digitalizar documentos con folios anteriores al último registrado.
                             <br>

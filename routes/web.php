@@ -39,8 +39,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/BloquearEntrega', 'DocumentosInternosController@bloquear_doc');
 
-    Route::post('/FichaErrorDocInt','DocumentosInternosController@ficha_error_docs');
+    Route::post('/FichaErrorDocInt', 'DocumentosInternosController@ficha_error_docs');
     Route::post('/GuardarDocCorreg', 'DocumentosInternosController@guardar_doc_correg');
+
+    Route::get('/Archivo/2020', 'DocumentosInternosController@archivo2020');
 
 });
 

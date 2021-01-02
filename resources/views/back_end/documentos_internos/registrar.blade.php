@@ -82,9 +82,8 @@
         </div>
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#inicio" data-toggle="tab" aria-expanded="true"><i class="fa fa-info"></i>
-                        <strong>Resumen</strong></a></li>
-                <li class=""><a href="#res_ex" data-toggle="tab" aria-expanded="false"><i class="fa fa-paperclip"></i>
+                <li class="active"><a href="#res_ex" data-toggle="tab" aria-expanded="false"><i
+                            class="fa fa-paperclip"></i>
                         <strong>Resolución Exenta</strong></a></li>
                 <li class=""><a href="#res_af" data-toggle="tab" aria-expanded="false"><i class="fa fa-paperclip"></i>
                         <strong>Resolución Afecta</strong></a></li>
@@ -94,11 +93,7 @@
 
             <div class="tab-content">
 
-                <div class="tab-pane active" id="inicio">
-
-                </div>
-
-                <div class="tab-pane" id="res_ex">
+                <div class="tab-pane active" id="res_ex">
 
                     <form class='form-horizontal' action="/GuardarNuevoDoc" method="POST" id='formulario_res_ex'
                           enctype="multipart/form-data">
@@ -119,7 +114,7 @@
                                 <label for="inputEmail3" class="col-sm-1 control-label">Año</label>
                                 <div class="col-sm-2">
                                     <input type="number" class="form-control" min="0" id="anniodocint"
-                                           value="{{ date('Y') }}" name="anniodocint" readonly>
+                                           value="2020" name="anniodocint" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -273,7 +268,7 @@
                                 <label for="inputEmail3" class="col-sm-1 control-label">Año</label>
                                 <div class="col-sm-2">
                                     <input type="number" class="form-control" min="0" id="anniodocint"
-                                           value="{{ date('Y') }}" name="anniodocint" readonly>
+                                           value="2020" name="anniodocint" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -386,7 +381,7 @@
                                 <label for="inputEmail3" class="col-sm-1 control-label">Año</label>
                                 <div class="col-sm-2">
                                     <input type="number" class="form-control" min="0" id="anniodocint"
-                                           value="{{ date('Y') }}" name="anniodocint" readonly>
+                                           value="2020" name="anniodocint" readonly>
                                 </div>
                             </div>
                             <div class="form-group">

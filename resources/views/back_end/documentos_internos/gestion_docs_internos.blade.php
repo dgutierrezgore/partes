@@ -9,7 +9,7 @@
 @endsection
 
 @section('contentheader_description')
-    - Grilla 2020
+    - Grilla {{ date('Y') }}
 @endsection
 
 @section('main-content')
@@ -18,7 +18,7 @@
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#inicio" data-toggle="tab" aria-expanded="true"><i class="fa fa-home"></i>
-                        <strong>Año en Curso 2020</strong></a></li>
+                        <strong>Año en Curso {{date('Y')}}</strong></a></li>
                 <li class=""><a href="#exentas2020" data-toggle="tab" aria-expanded="false"><i
                             class="fa fa-calendar"></i>
                         <strong>Res. Exentas</strong></a></li>
@@ -49,7 +49,7 @@
                                 </tr>
                                 <?php foreach ($grilla_total as $listado) {
                                     echo "<tr><td>";
-                                    echo "<small>" . $listado->foliodocint . " - 2020</small>";
+                                    echo "<small>" . $listado->foliodocint . " - 2021</small>";
                                     echo "</td>";
 
                                     echo "<td>";
@@ -81,7 +81,7 @@
                 <div class="tab-pane" id="exentas2020">
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title">Grilla de Resoluciones Exentas del año 2020</h3>
+                            <h3 class="box-title">Grilla de Resoluciones Exentas del año {{ date('Y') }}</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -148,7 +148,7 @@
                 <div class="tab-pane" id="afectas2020">
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title">Grilla de Resoluciones Afectas del año 2020</h3>
+                            <h3 class="box-title">Grilla de Resoluciones Afectas del año {{ date('Y') }}</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -227,7 +227,7 @@
                 <div class="tab-pane" id="ordinarios2020">
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title">Grilla de Ordinarios del año 2020</h3>
+                            <h3 class="box-title">Grilla de Ordinarios del año {{ date('Y') }}</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">

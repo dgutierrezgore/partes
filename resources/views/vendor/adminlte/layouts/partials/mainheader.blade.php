@@ -6,7 +6,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>A</b>LT</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><p><strong>PartesDigital </strong><small>V.01</small></p></span>
+        <span class="logo-lg"><p><strong>PartesDigital </strong><small>V.02</small></p></span>
     </a>
 
     <!-- Header Navbar -->
