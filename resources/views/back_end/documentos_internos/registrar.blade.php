@@ -114,7 +114,7 @@
                                 <label for="inputEmail3" class="col-sm-1 control-label">Año</label>
                                 <div class="col-sm-2">
                                     <input type="number" class="form-control" min="0" id="anniodocint"
-                                           value="2020" name="anniodocint" readonly>
+                                           value="2021" name="anniodocint" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -268,7 +268,7 @@
                                 <label for="inputEmail3" class="col-sm-1 control-label">Año</label>
                                 <div class="col-sm-2">
                                     <input type="number" class="form-control" min="0" id="anniodocint"
-                                           value="2020" name="anniodocint" readonly>
+                                           value="2021" name="anniodocint" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -381,7 +381,7 @@
                                 <label for="inputEmail3" class="col-sm-1 control-label">Año</label>
                                 <div class="col-sm-2">
                                     <input type="number" class="form-control" min="0" id="anniodocint"
-                                           value="2020" name="anniodocint" readonly>
+                                           value="2021" name="anniodocint" readonly>
                                 </div>
                             </div>
                             <div class="form-group">

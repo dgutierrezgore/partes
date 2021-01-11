@@ -71,7 +71,7 @@ class DocumentosInternosController extends Controller
                         ['estdocint', '=', 1],
                         ['tipos_docs_internos_iddocsint', '=', 1],
                     ]) //Cambiar por tipo
-                    //->whereYear('fechadocint', date('Y'))
+                    ->whereYear('fechadocint', date('Y'))
                     ->max('foliodocint');
 
                 //Le suma 1 al último folio asignado Res.Ex
@@ -82,7 +82,7 @@ class DocumentosInternosController extends Controller
                         ['estdocint', '=', 1],
                         ['tipos_docs_internos_iddocsint', '=', 2]
                     ]) //Cambiar por tipo
-                    //->whereYear('fechadocint', date('Y'))
+                    ->whereYear('fechadocint', date('Y'))
                     ->max('foliodocint');
 
                 $ult_res_af = $ult_res_af + 1;
@@ -92,7 +92,7 @@ class DocumentosInternosController extends Controller
                         ['estdocint', '=', 1],
                         ['tipos_docs_internos_iddocsint', '=', 3]
                     ]) //Cambiar por tipo
-                    //->whereYear('fechadocint', date('Y'))
+                    ->whereYear('fechadocint', date('Y'))
                     ->max('foliodocint');
 
                 $ult_circ = $ult_circ + 1;
@@ -204,7 +204,7 @@ class DocumentosInternosController extends Controller
                         $folio_existe = DB::table('op_documentos_internos')
                             ->where([
                                 ['tipos_docs_internos_iddocsint', $tipodoc],
-                                ['foliodocint', $request->foliodocint]
+                                ['foliocompdocint', 'RES_EX_' . $request->foliodocint . '_' . $request->anniodocint]
                             ])
                             ->count();
 
@@ -344,7 +344,7 @@ class DocumentosInternosController extends Controller
                         $folio_existe = DB::table('op_documentos_internos')
                             ->where([
                                 ['tipos_docs_internos_iddocsint', $tipodoc],
-                                ['foliodocint', $request->foliodocint]
+                                ['foliocompdocint', 'RES_AF_' . $request->foliodocint . '_' . $request->anniodocint]
                             ])
                             ->count();
 
@@ -458,7 +458,7 @@ class DocumentosInternosController extends Controller
                         $folio_existe = DB::table('op_documentos_internos')
                             ->where([
                                 ['tipos_docs_internos_iddocsint', $tipodoc],
-                                ['foliodocint', $request->foliodocint]
+                                ['foliocompdocint', 'ORD_' . $request->foliodocint . '_' . $request->anniodocint]
                             ])
                             ->count();
 
