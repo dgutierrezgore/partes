@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4083d0f6-22a0-42be-b7d8-ffb358565c84" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/correos/avisodocint.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/correos/avisodocint.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +147,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../2020/Aplicativo Rendiciones/resources/views/correos/avisocierrerend.blade.php" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -251,7 +250,8 @@
       <workItem from="1609554413232" duration="2591000" />
       <workItem from="1609557735057" duration="92000" />
       <workItem from="1610028315790" duration="318000" />
-      <workItem from="1610373269128" duration="2262000" />
+      <workItem from="1610373269128" duration="2502000" />
+      <workItem from="1610378811796" duration="11000" />
     </task>
     <servers />
   </component>
@@ -259,10 +259,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="-1234" y="219" key="FileChooserDialogImpl" timestamp="1610374740730">
+    <state x="-1234" y="219" key="FileChooserDialogImpl" timestamp="1610378821400">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
-    <state x="-1234" y="219" key="FileChooserDialogImpl/0.0.1536.834/-1920.0.1920.1050/1920.0.1920.1050@-1920.0.1920.1050" timestamp="1610374740730" />
+    <state x="-1234" y="219" key="FileChooserDialogImpl/0.0.1536.834/-1920.0.1920.1050/1920.0.1920.1050@-1920.0.1920.1050" timestamp="1610378821400" />
     <state x="549" y="174" key="FileChooserDialogImpl/0.0.1536.834/-1920.0.1920.1050/1920.0.1920.1050@0.0.1536.834" timestamp="1610028632408" />
     <state x="549" y="174" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1609557825506" />
   </component>

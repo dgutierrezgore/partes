@@ -103,6 +103,7 @@ class DocumentosInternosController extends Controller
                         ['estdocint', '=', 1],
                         ['tipos_docs_internos_iddocsint', '=', '1']
                     ]) //Cambiar por tipo
+                    ->whereYear('fechadocint', date('Y'))
                     ->orderby('foliodocint', 'DESC')
                     ->limit(5)
                     ->get();
@@ -112,6 +113,7 @@ class DocumentosInternosController extends Controller
                         ['estdocint', '=', 1],
                         ['tipos_docs_internos_iddocsint', '=', 2]
                     ]) //Cambiar por tipo
+                    ->whereYear('fechadocint', date('Y'))
                     ->orderby('foliodocint', 'DESC')
                     ->limit(5)
                     ->get();
@@ -121,6 +123,7 @@ class DocumentosInternosController extends Controller
                         ['estdocint', '=', 1],
                         ['tipos_docs_internos_iddocsint', '=', 3]
                     ]) //Cambiar por tipo
+                    ->whereYear('fechadocint', date('Y'))
                     ->orderby('foliodocint', 'DESC')
                     ->limit(5)
                     ->get();
